@@ -1,510 +1,127 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>NovaAPI — Premium Developer Platform</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Aerivue API</title>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
-<style>
-:root{
-    --bg:#050816;
-    --bg2:#0b1023;
-    --card:rgba(255,255,255,.06);
-    --border:rgba(255,255,255,.08);
-    --text:#fff;
-    --muted:#aab2c8;
-    --primary:#6d7cff;
-    --secondary:#8b5cf6;
-    --cyan:#00d4ff;
-    --green:#3ddc97;
-    --shadow:0 25px 80px rgba(0,0,0,.45);
-}
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
 
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
 
-html{
-    scroll-behavior:smooth;
-}
-
-body{
-    font-family:Inter,sans-serif;
-    color:var(--text);
-    background:
-    radial-gradient(circle at top left,#1a1f55 0%,transparent 35%),
-    radial-gradient(circle at bottom right,#11284f 0%,transparent 30%),
-    linear-gradient(180deg,#050816,#090d1d 45%,#050816);
-    overflow-x:hidden;
-}
-
-body::before{
-    content:"";
-    position:fixed;
-    inset:0;
-    background-image:
-    linear-gradient(rgba(255,255,255,.02) 1px,transparent 1px),
-    linear-gradient(90deg,rgba(255,255,255,.02) 1px,transparent 1px);
-    background-size:42px 42px;
-    pointer-events:none;
-    mask-image:linear-gradient(to bottom,rgba(0,0,0,.8),transparent);
-}
-
-.container{
-    width:min(1180px,92%);
-    margin:auto;
-}
-
-nav{
-    position:sticky;
-    top:0;
-    z-index:100;
-    backdrop-filter:blur(20px);
-    background:rgba(5,8,22,.6);
-    border-bottom:1px solid rgba(255,255,255,.05);
-}
-
-.nav-inner{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    padding:18px 0;
-}
-
-.logo{
-    display:flex;
-    gap:12px;
-    align-items:center;
-    font-size:20px;
-    font-weight:700;
-}
-
-.logo-icon{
-    width:40px;
-    height:40px;
-    border-radius:12px;
-    background:linear-gradient(135deg,var(--primary),var(--cyan));
-    display:grid;
-    place-items:center;
-    font-weight:800;
-}
-
-.links{
-    display:flex;
-    gap:30px;
-}
-
-.links a{
-    color:var(--muted);
-    text-decoration:none;
-    transition:.3s;
-}
-
-.links a:hover{
-    color:white;
-}
-
-.btn{
-    border:none;
-    cursor:pointer;
-    padding:14px 24px;
-    border-radius:14px;
-    font-weight:600;
-    transition:.3s;
-}
-
-.btn-primary{
-    background:linear-gradient(135deg,var(--primary),var(--secondary));
-    color:white;
-    box-shadow:0 12px 35px rgba(109,124,255,.35);
-}
-
-.btn-primary:hover{
-    transform:translateY(-3px);
-}
-
-.btn-secondary{
-    background:transparent;
-    border:1px solid rgba(255,255,255,.15);
-    color:white;
-}
-
-.hero{
-    padding:110px 0 70px;
-}
-
-.hero-grid{
-    display:grid;
-    grid-template-columns:1.1fr .9fr;
-    gap:60px;
-    align-items:center;
-}
-
-.badge{
-    display:inline-flex;
-    align-items:center;
-    gap:10px;
-    padding:10px 16px;
-    background:rgba(255,255,255,.05);
-    border:1px solid rgba(255,255,255,.08);
-    border-radius:999px;
-    color:#dbe5ff;
-    margin-bottom:25px;
-}
-
-.hero h1{
-    font-size:clamp(42px,6vw,74px);
-    line-height:1.05;
-    margin-bottom:22px;
-}
-
-.gradient{
-    background:linear-gradient(90deg,var(--cyan),#9ca6ff,#ffffff);
-    -webkit-background-clip:text;
-    color:transparent;
-}
-
-.hero p{
-    color:var(--muted);
-    font-size:18px;
-    line-height:1.8;
-    max-width:620px;
-}
-
-.hero-actions{
-    margin-top:35px;
-    display:flex;
-    gap:18px;
-    flex-wrap:wrap;
-}
-
-.stats{
-    display:flex;
-    gap:35px;
-    margin-top:55px;
-    flex-wrap:wrap;
-}
-
-.stat h2{
-    font-size:34px;
-}
-
-.stat p{
-    color:var(--muted);
-}
-
-.code-window{
-    position:relative;
-    background:#0d1328;
-    border-radius:24px;
-    padding:24px;
-    box-shadow:var(--shadow);
-    border:1px solid rgba(255,255,255,.08);
-    overflow:hidden;
-}
-
-.code-window::before{
-    content:"";
-    position:absolute;
-    inset:-30%;
-    background:conic-gradient(from 90deg,var(--primary),transparent,var(--cyan),transparent);
-    animation:spin 9s linear infinite;
-    opacity:.18;
-}
-
-.code-inner{
-    position:relative;
-    background:#0b1120;
-    border-radius:18px;
-    padding:22px;
-    overflow:auto;
-}
-
-.dots{
-    display:flex;
-    gap:8px;
-    margin-bottom:20px;
-}
-
-.dots span{
-    width:11px;
-    height:11px;
-    border-radius:50%;
-}
-
-.red{background:#ff5f56;}
-.yellow{background:#ffbd2e;}
-.green{background:#27c93f;}
-
-pre{
-    color:#d9e2ff;
-    font-size:14px;
-    line-height:1.8;
-}
-
-section{
-    padding:90px 0;
-}
-
-.section-title{
-    text-align:center;
-    font-size:42px;
-    margin-bottom:18px;
-}
-
-.section-sub{
-    color:var(--muted);
-    max-width:700px;
-    margin:auto;
-    text-align:center;
-    line-height:1.8;
-}
-
-.grid-3{
-    margin-top:60px;
-    display:grid;
-    grid-template-columns:repeat(3,1fr);
-    gap:26px;
-}
-
-.card{
-    background:var(--card);
-    backdrop-filter:blur(18px);
-    border:1px solid var(--border);
-    padding:28px;
-    border-radius:22px;
-    transition:.35s;
-}
-
-.card:hover{
-    transform:translateY(-8px);
-    border-color:rgba(109,124,255,.45);
-}
-
-.icon{
-    width:58px;
-    height:58px;
-    display:grid;
-    place-items:center;
-    border-radius:16px;
-    background:linear-gradient(135deg,var(--primary),var(--cyan));
-    font-size:24px;
-    margin-bottom:18px;
-}
-
-.card h3{
-    margin-bottom:10px;
-}
-
-.card p{
-    color:var(--muted);
-    line-height:1.8;
-}
-
-.pricing{
-    display:grid;
-    grid-template-columns:repeat(3,1fr);
-    gap:30px;
-    margin-top:60px;
-}
-
-.price-card{
-    background:rgba(255,255,255,.05);
-    border:1px solid rgba(255,255,255,.08);
-    border-radius:24px;
-    padding:35px;
-}
-
-.feature{
-    margin:15px 0;
-    color:var(--muted);
-}
-
-.price{
-    font-size:52px;
-    margin:20px 0;
-}
-
-.popular{
-    border:2px solid var(--primary);
-    transform:scale(1.04);
-    position:relative;
-}
-
-.popular::before{
-    content:"Most Popular";
-    position:absolute;
-    top:-14px;
-    right:22px;
-    background:linear-gradient(135deg,var(--primary),var(--secondary));
-    padding:8px 14px;
-    border-radius:999px;
-    font-size:12px;
-}
-
-.cta{
-    background:
-    radial-gradient(circle at top,var(--primary),transparent 60%),
-    rgba(255,255,255,.04);
-    border:1px solid rgba(255,255,255,.08);
-    border-radius:30px;
-    text-align:center;
-    padding:70px 35px;
-}
-
-footer{
-    padding:50px 0;
-    color:var(--muted);
-    border-top:1px solid rgba(255,255,255,.05);
-    text-align:center;
-}
-
-.fade{
-    opacity:0;
-    transform:translateY(40px);
-    transition:1s;
-}
-
-.fade.show{
-    opacity:1;
-    transform:none;
-}
-
-.glow{
-    position:absolute;
-    width:420px;
-    height:420px;
-    background:radial-gradient(circle,var(--primary),transparent 70%);
-    filter:blur(100px);
-    opacity:.12;
-    pointer-events:none;
-}
-
-.glow.one{
-    top:-100px;
-    left:-120px;
-}
-
-.glow.two{
-    bottom:-120px;
-    right:-120px;
-}
-
-@keyframes spin{
-    from{transform:rotate(0);}
-    to{transform:rotate(360deg);}
-}
-
-@media(max-width:980px){
-
-.hero-grid,
-.grid-3,
-.pricing{
-grid-template-columns:1fr;
-}
-
-.links{
-display:none;
-}
-
-.popular{
-transform:none;
-}
-
-.hero{
-padding-top:70px;
-}
-
-}
-</style>
+<link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-<div class="glow one"></div>
-<div class="glow two"></div>
+<div class="blur blur1"></div>
+<div class="blur blur2"></div>
 
 <nav>
-<div class="container nav-inner">
+
+<div class="container nav">
+
 <div class="logo">
-<div class="logo-icon">N</div>
-NovaAPI
+<div class="logo-box">
+A
 </div>
 
-<div class="links">
+<span>Aerivue API</span>
+
+</div>
+
+<div class="nav-links">
+
 <a href="#features">Features</a>
-<a href="#pricing">Pricing</a>
-<a href="#docs">Docs</a>
-<a href="#contact">Contact</a>
+
+<a href="#docs">Documentation</a>
+
+<a href="#example">Example</a>
+
+<a href="https://t.me/aerivue" target="_blank">
+Telegram
+</a>
+
 </div>
 
-<button class="btn btn-primary">Get API Key</button>
 </div>
+
 </nav>
 
-<header class="hero">
+<section class="hero">
 
 <div class="container hero-grid">
 
 <div>
 
 <div class="badge">
-⚡ Trusted by 10,000+ Developers
+⚡ Fast • Secure • JSON API
 </div>
 
 <h1>
-Build Faster with the
-<span class="gradient">Next-Generation API Platform</span>
+
+Phone Lookup
+<span>API</span>
+
 </h1>
 
 <p>
-Deploy secure, scalable, lightning-fast APIs with enterprise reliability,
-global edge infrastructure, analytics, authentication, and world-class
-developer experience.
+
+Simple phone lookup endpoint returning clean JSON responses.
+
+Powered by Aerivue with secure backend proxy.
+
 </p>
 
-<div class="hero-actions">
-<button class="btn btn-primary">Start Free</button>
-<button class="btn btn-secondary">Read Documentation</button>
-</div>
+<div class="hero-buttons">
 
-<div class="stats">
+<a
+class="btn primary"
+target="_blank"
+href="https://api.aerivue.dev/lookup?number=7571902689">
 
-<div class="stat">
-<h2 class="counter" data-target="99.99">0</h2>
-<p>Uptime %</p>
-</div>
+Try API
 
-<div class="stat">
-<h2 class="counter" data-target="120">0</h2>
-<p>Countries</p>
-</div>
+</a>
 
-<div class="stat">
-<h2 class="counter" data-target="250">0</h2>
-<p>M Requests / Day</p>
-</div>
+<button
+class="btn secondary"
+id="copyEndpoint">
+
+Copy Endpoint
+
+</button>
 
 </div>
 
+<div class="endpoint">
+
+GET
+
+<code>
+
+https://api.aerivue.dev/lookup?number=7571902689
+
+</code>
+
 </div>
 
-<div>
+</div>
 
-<div class="code-window">
+<div class="terminal">
 
-<div class="code-inner">
+<div class="terminal-top">
 
-<div class="dots">
 <span class="red"></span>
+
 <span class="yellow"></span>
+
 <span class="green"></span>
+
 </div>
 
 <pre id="typing"></pre>
@@ -513,110 +130,89 @@ developer experience.
 
 </div>
 
-</div>
-
-</div>
-
-</header>
+</section>
 
 <section id="features">
 
 <div class="container">
 
-<h2 class="section-title fade">Everything Developers Need</h2>
+<h2>
 
-<p class="section-sub fade">
-Powerful infrastructure built for modern products with security,
-speed, scalability and simplicity at its core.
-</p>
+Features
 
-<div class="grid-3">
+</h2>
 
-<div class="card fade">
-<div class="icon">🚀</div>
-<h3>Ultra Fast</h3>
+<div class="cards">
+
+<div class="card">
+
+<i class="fa-solid fa-bolt"></i>
+
+<h3>
+
+Fast Response
+
+</h3>
+
 <p>
-Edge optimized network with low latency responses worldwide.
+
+Optimized proxy endpoint with low latency.
+
 </p>
+
 </div>
 
-<div class="card fade">
-<div class="icon">🔒</div>
-<h3>Enterprise Security</h3>
+<div class="card">
+
+<i class="fa-solid fa-lock"></i>
+
+<h3>
+
+Secure
+
+</h3>
+
 <p>
-OAuth, JWT, API keys, encryption, rate limits and audit logs.
+
+API key stays protected on server.
+
 </p>
+
 </div>
 
-<div class="card fade">
-<div class="icon">📊</div>
-<h3>Real-Time Analytics</h3>
+<div class="card">
+
+<i class="fa-solid fa-code"></i>
+
+<h3>
+
+Developer Friendly
+
+</h3>
+
 <p>
-Monitor requests, errors, latency and usage with beautiful dashboards.
-</p>
-</div>
 
-</div>
+Simple GET endpoint with JSON output.
 
-</div>
-
-</section>
-
-<section id="pricing">
-
-<div class="container">
-
-<h2 class="section-title fade">Simple Pricing</h2>
-
-<p class="section-sub fade">
-Transparent plans that grow with your application.
 </p>
 
-<div class="pricing">
-
-<div class="price-card fade">
-
-<h3>Starter</h3>
-<div class="price">$0</div>
-
-<div class="feature">✓ 100K requests</div>
-<div class="feature">✓ Email Support</div>
-<div class="feature">✓ Analytics</div>
-
-<br>
-
-<button class="btn btn-secondary" style="width:100%">Choose</button>
-
 </div>
 
-<div class="price-card popular fade">
+<div class="card">
 
-<h3>Pro</h3>
-<div class="price">$49</div>
+<i class="fa-solid fa-server"></i>
 
-<div class="feature">✓ Unlimited Projects</div>
-<div class="feature">✓ Priority Support</div>
-<div class="feature">✓ SLA</div>
-<div class="feature">✓ Team Access</div>
+<h3>
 
-<br>
+Reliable
 
-<button class="btn btn-primary" style="width:100%">Get Started</button>
+</h3>
 
-</div>
+<p>
 
-<div class="price-card fade">
+Runs on modern cloud infrastructure.
 
-<h3>Enterprise</h3>
-<div class="price">Custom</div>
-
-<div class="feature">✓ Dedicated Cluster</div>
-<div class="feature">✓ SSO</div>
-<div class="feature">✓ Premium Support</div>
-
-<br>
-
-<button class="btn btn-secondary" style="width:100%">Contact Sales</button>
+</p>
 
 </div>
 
@@ -630,21 +226,53 @@ Transparent plans that grow with your application.
 
 <div class="container">
 
-<div class="cta fade">
+<h2>
 
-<h2 class="section-title">
-Ready to Ship Faster?
+Documentation
+
 </h2>
 
-<p class="section-sub">
-Generate your API key in seconds and integrate with just a few lines of code.
-</p>
+<div class="doc-box">
+
+<h3>
+
+Endpoint
+
+</h3>
+
+<code>
+
+GET https://api.aerivue.dev/lookup
+
+</code>
 
 <br><br>
 
-<button class="btn btn-primary">
-Start Building →
-</button>
+<h3>
+
+Query Parameter
+
+</h3>
+
+<code>
+
+number
+
+</code>
+
+<br><br>
+
+<h3>
+
+Example
+
+</h3>
+
+<code>
+
+https://api.aerivue.dev/lookup?number=7571902689
+
+</code>
 
 </div>
 
@@ -652,108 +280,71 @@ Start Building →
 
 </section>
 
-<footer id="contact">
-© 2026 NovaAPI. Built for developers.
+<section id="example">
+
+<div class="container">
+
+<h2>
+
+Sample Response
+
+</h2>
+
+<div class="json-box">
+
+<pre>{
+  "success": true,
+  "result": {
+    "result": [
+      {
+        "fname": "Godrej Agrovet Limited",
+        "circle": "AIRTEL UP EAST",
+        "address": "Unnao, Uttar Pradesh",
+        "num": "7571902689"
+      }
+    ],
+    "status": "success"
+  }
+}</pre>
+
+</div>
+
+</div>
+
+</section>
+
+<footer>
+
+<div class="container footer">
+
+<div>
+
+Made with ❤️ by
+
+<b>
+
+Aerivue
+
+</b>
+
+</div>
+
+<a
+target="_blank"
+href="https://t.me/aerivue"
+class="telegram">
+
+<i class="fab fa-telegram"></i>
+
+@aerivue
+
+</a>
+
+</div>
+
 </footer>
 
-<script>
-const code=`fetch("https://api.nova.dev/v1/chat",{
-  method:"POST",
-  headers:{
-    Authorization:"Bearer YOUR_API_KEY",
-    "Content-Type":"application/json"
-  },
-  body:JSON.stringify({
-    model:"nova-pro",
-    prompt:"Hello World"
-  })
-})
-.then(res=>res.json())
-.then(console.log);`;
-
-let i=0;
-
-function type(){
-if(i<code.length){
-document.getElementById("typing").textContent+=code.charAt(i);
-i++;
-setTimeout(type,20);
-}
-}
-
-type();
-
-const observer=new IntersectionObserver(entries=>{
-entries.forEach(entry=>{
-if(entry.isIntersecting){
-entry.target.classList.add("show");
-}
-});
-},{
-threshold:.2
-});
-
-document.querySelectorAll(".fade").forEach(el=>{
-observer.observe(el);
-});
-
-const counters=document.querySelectorAll(".counter");
-
-const counterObserver=new IntersectionObserver(entries=>{
-
-entries.forEach(entry=>{
-
-if(entry.isIntersecting){
-
-const el=entry.target;
-const target=parseFloat(el.dataset.target);
-const duration=1500;
-const start=performance.now();
-
-function update(now){
-
-const progress=Math.min((now-start)/duration,1);
-const value=target*progress;
-
-if(target%1!==0){
-el.textContent=value.toFixed(2);
-}else{
-el.textContent=Math.floor(value);
-}
-
-if(progress<1){
-requestAnimationFrame(update);
-}else{
-el.textContent=target;
-}
-
-}
-
-requestAnimationFrame(update);
-
-counterObserver.unobserve(el);
-
-}
-
-});
-
-});
-
-counters.forEach(c=>{
-counterObserver.observe(c);
-});
-
-document.querySelectorAll("button").forEach(btn=>{
-btn.addEventListener("mousemove",e=>{
-
-const rect=btn.getBoundingClientRect();
-
-btn.style.backgroundPosition=
-`${e.clientX-rect.left}px ${e.clientY-rect.top}px`;
-
-});
-});
-</script>
+<script src="script.js"></script>
 
 </body>
 </html>
