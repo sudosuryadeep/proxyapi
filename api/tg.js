@@ -14,13 +14,19 @@ export default async function handler(req, res) {
     const response = await fetch(url);
     const data = await response.json();
 
-    // Return only the results object
-    return res.status(response.status).json(data.results || {});
+    return res.status(response.status).json({
+      success: true,
+      provided_by: "Aerivue",
+      telegram: "@aerivue",
+      result: data.results || {}
+    });
 
   } catch (err) {
     return res.status(500).json({
       success: false,
-      error: "Internal Server Error"
+      provided_by: "Aerivue",
+      telegram: "@aerivue",
+      message: "Internal Server Error"
     });
   }
 }
