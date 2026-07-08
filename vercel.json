@@ -3,6 +3,10 @@
     {
       "source": "/lookup",
       "destination": "/api/lookup"
+    },
+    {
+      "source": "/tg",
+      "destination": "/api/tg"
     }
   ]
 }
