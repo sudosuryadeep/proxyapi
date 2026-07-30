@@ -11,6 +11,10 @@
     {
       "source": "/rto",
       "destination": "/api/rto"
-    }
+    },
+    {
+      "source": "/adhar",
+      "destination": "/api/adhar"
+    },
   ]
 }
