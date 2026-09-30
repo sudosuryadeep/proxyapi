@@ -15,6 +15,10 @@
     {
       "source": "/aadhar",
       "destination": "/api/aadhar"
+    },
+    {
+      "source": "/telegram",
+      "destination": "/api/telegram"
     }
   ]
 }
