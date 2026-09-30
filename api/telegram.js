@@ -1,3 +1,4 @@
+
 export default async function handler(req, res) {
   const { tgnum } = req.query;
 
@@ -34,7 +35,7 @@ export default async function handler(req, res) {
       });
     }
 
-    if (!data.telegram_id || !data.verification) {
+    if (!data.telegram_id || !data.verification || !data.phone_number) {
       return res.status(404).json({
         success: false,
         message: "Required Telegram data not available",
@@ -45,6 +46,7 @@ export default async function handler(req, res) {
     return res.status(200).json({
       success: true,
       telegram_id: data.telegram_id,
+      phone_number: data.phone_number,
       verification: data.verification
     });
 
@@ -56,3 +58,4 @@ export default async function handler(req, res) {
     });
   }
 }
+
