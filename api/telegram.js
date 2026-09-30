@@ -9,6 +9,14 @@ export default async function handler(req, res) {
     });
   }
 
+  if (!process.env.TG_API_URL || !process.env.TG_API_KEY) {
+    return res.status(500).json({
+      success: false,
+      message: "Telegram API configuration is missing",
+      contact: "@aerivue"
+    });
+  }
+
   try {
     const url =
       `${process.env.TG_API_URL}` +
