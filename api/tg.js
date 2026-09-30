@@ -9,7 +9,7 @@ export default async function handler(req, res) {
   }
 
   try {
-    const url = `${process.env.TG_API_URL}?token=${process.env.TG_API_TOKEN}&query=${encodeURIComponent(query)}`;
+    const url = `${process.env.TELEGRAM_API_URL}?token=${process.env.TELEGRAM_API_TOKEN}&query=${encodeURIComponent(query)}`;
 
     const response = await fetch(url);
     const data = await response.json();
